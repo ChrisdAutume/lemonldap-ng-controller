@@ -19,7 +19,7 @@ all: all-container
 BUILDTAGS=
 
 TAG?=0.3.0-dev
-REGISTRY?=lemonldapng
+REGISTRY?=cdautume
 GOOS?=linux
 DOCKER?=gcloud docker --
 SED_I?=sed -i
