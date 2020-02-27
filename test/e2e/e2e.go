@@ -23,7 +23,6 @@ import (
 	"github.com/onsi/ginkgo"
 	"github.com/onsi/ginkgo/config"
 	"github.com/onsi/gomega"
-	"k8s.io/apiserver/pkg/util/logs"
 	// required
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 
@@ -37,8 +36,8 @@ import (
 // RunE2ETests checks configuration parameters (specified through flags) and then runs
 // E2E tests using the Ginkgo runner.
 func RunE2ETests(t *testing.T) {
-	logs.InitLogs()
-	defer logs.FlushLogs()
+	//logs.InitLogs()
+	//defer logs.FlushLogs()
 
 	gomega.RegisterFailHandler(ginkgo.Fail)
 	// Disable skipped tests unless they are explicitly requested.
