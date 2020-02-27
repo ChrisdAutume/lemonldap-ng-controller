@@ -8,9 +8,7 @@ services:
 language: go
 
 go:
-- 1.9.2
-
-go_import_path: github.com/lemonldap-ng-controller/lemonldap-ng-controller
+- 1.13
 
 env:
   global:
@@ -44,23 +42,10 @@ jobs:
     - if ! go get github.com/golang/tools/cmd/cover; then go get golang.org/x/tools/cmd/cover;fi
     - if ! go get github.com/jteeuwen/go-bindata/...; then github.com/jteeuwen/go-bindata/...;fi
     - make cover
-  - stage: e2e
-    install:
-    - go get -t -v ./...
-    - ls -ld "$GOPATH"/src/k8s.io/*/vendor/github.com/golang/glog
-    - rm -r "$GOPATH"/src/k8s.io/*/vendor/github.com/golang/glog
-    before_script:
-    - if ! go get github.com/jteeuwen/go-bindata/...; then github.com/jteeuwen/go-bindata/...;fi
-    - make e2e-image
-    - test/e2e/up.sh
-    - test/e2e/wait-for-nginx.sh
-    - test/e2e/wait-for-lemonldap-ng.sh
-    script:
-    - make e2e-test
 
 stage: Build
 install:
-- go get -t -v $(go list ./... | grep -v vendor | grep -v '/test/e2e')
+- go get .
 script:
 - make sub-container-$ARCH
 - if [ "$TRAVIS_REPO_SLUG" == "ChrisdAutume/lemonldap-ng-controller" -a "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == false ]; then
